@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Sphinx",
     "shortDescription": "Sphinx knowledge base plugins.",
-    "longDescription": "Augment your agent by giving it access to the Sphinx knowledge base for data, definitions, and other org-internal knowledge base.",
+    "longDescription": "Augment your agent by giving it access to the Sphinx knowledge base for data, definitions, and other org-internal context.",
     "developerName": "Sphinx",
     "category": "Productivity",
     "websiteUrl": "https://sphinx.ai",
