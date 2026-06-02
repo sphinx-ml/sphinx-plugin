@@ -13,7 +13,7 @@
       "name": "sphinx",
       "source": {
         "source": "github",
-        "url": "sphinx-ml/sphinx-plugin"
+        "repo": "sphinx-ml/sphinx-plugin"
       },
       "description": "Sphinx knowledge base plugin for Claude.",
       "version": "1.0.0",
