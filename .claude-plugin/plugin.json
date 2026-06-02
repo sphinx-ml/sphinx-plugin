@@ -1,0 +1,20 @@
+{
+  "name": "sphinx",
+  "displayName": "Sphinx",
+  "description": "Sphinx knowledge base plugin for Claude.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Sphinx",
+    "url": "https://sphinx.ai"
+  },
+  "homepage": "https://sphinx.ai",
+  "repository": "https://github.com/sphinx-ml/sphinx-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "data",
+    "search",
+    "wiki",
+    "knowledge",
+    "internal-context"
+  ]
+}

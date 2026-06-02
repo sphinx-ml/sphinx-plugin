@@ -1,0 +1,34 @@
+{
+  "name": "Sphinx",
+  "version": "1.0.0",
+  "description": "Sphinx knowledge base plugin for Codex.",
+  "author": {
+    "name": "Sphinx",
+    "url": "https://sphinx.ai"
+  },
+  "homepage": "https://sphinx.ai",
+  "repository": "https://github.com/sphinx-ml/sphinx-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "data",
+    "search",
+    "wiki",
+    "knowledge",
+    "internal-context"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Sphinx",
+    "shortDescription": "Sphinx knowledge base plugins.",
+    "longDescription": "Augment your agent by giving it access to the Sphinx knowledge base for data, definitions, and other org-internal knowledge base.",
+    "developerName": "Sphinx",
+    "category": "Productivity",
+    "websiteUrl": "https://sphinx.ai",
+    "privacyPolicyURL": "https://sphinx.ai/privacy",
+    "termsOfServiceURL": "https://sphinx.ai/terms-of-service",
+    "brandColor": "#30121C",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}
