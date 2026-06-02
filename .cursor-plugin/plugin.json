@@ -4,13 +4,21 @@
   "description": "Sphinx knowledge base plugin for Cursor.",
   "version": "1.0.0",
   "author": {
-    "name": "Sphinx",
-    "url": "https://sphinx.ai"
+    "name": "Sphinx"
   },
   "homepage": "https://sphinx.ai",
   "repository": "https://github.com/sphinx-ml/sphinx-plugin",
   "license": "Apache-2.0",
+  "logo": "./assets/logo.png",
   "keywords": [
+    "data",
+    "search",
+    "wiki",
+    "knowledge",
+    "internal-context"
+  ],
+  "category": "Productivity",
+  "tags": [
     "data",
     "search",
     "wiki",
