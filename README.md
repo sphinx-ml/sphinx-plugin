@@ -1,29 +1,37 @@
-# Sphinx Plugin Installation
+Sphinx gives agents access to approved internal knowledge, including company context, process guidance, metric definitions, customer context, and marketing information. This repository bundles the Sphinx knowledge-base instructions with the Sphinx MCP server configuration.
 
-This repository is intended for organization administrators installing Sphinx for Codex, Cursor, and Claude users.
+Sphinx can be installed either as a plugin in supported clients (recommended) or as a standalone MCP connector.
 
-## Codex
+## Plugin Installation (recommended)
 
-In the [ChatGPT admin console](https://chatgpt.com/admin), manage plugin access from **Workspace settings > Apps**. OpenAI documents the current admin controls in:
+Client-specific installation instructions are provided below. Note that only users with pre-existing Sphinx accounts can use this plugin. If you are interested in trying Sphinx, contact our sales team.
 
-- [Using Codex with your ChatGPT plan](https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan)
-- [Workspace settings](https://help.openai.com/en/articles/8411955-what-workspace-settings-can-i-control-for-my-workspace)
+- [Claude](.claude-plugin/README.md)
+- [Codex](.codex-plugin/README.md)
+- [Cursor](.cursor-plugin/README.md)
 
-Add this repository as the Sphinx plugin package, then assign access to the appropriate users, groups, or roles.
+## MCP Connector Setup
 
-## Cursor
+Configure your MCP client to connect to the following MCP server URL:
 
-Install the plugin through the Cursor plugin flow. Cursor documents plugin creation and installation in:
+```text
+https://api.prod.sphinx.ai/mcp
+```
 
-- [Cursor plugins](https://cursor.com/docs/plugins#creating-plugins)
+The bundled MCP configuration registers the server as `sphinx`:
 
-Add this repository as the Sphinx plugin package, then assign access according to your organization's Cursor administration workflow.
+The Sphinx MCP server relies on OAuth authentication with Dynamic Client Registration (DCR). Most up-to-date MCP clients should support this out-of-the-box with no additional configuration.
 
-## Claude
+## MCP Tools
 
-Install the plugin through your organization-approved Claude administration workflow. For MCP configuration, follow Anthropic's documentation:
+- `search`: Search the Sphinx knowledge base with a natural-language query. Use vector search for conceptual questions and keyword search for exact terms.
+- `fetch`: Retrieve the full text of a knowledge base page. Must follow a call to `search`.
+- `suggest_edits`: Ask Sphinx to asynchronously improve the knowledge base based on natural-language guidance. The tool returns a URL where the created job can be monitored.
 
-- [Claude Code MCP](https://docs.anthropic.com/en/docs/claude-code/mcp)
-- [MCP overview](https://docs.anthropic.com/en/docs/mcp)
+## Troubleshooting
 
-Add this repository as the Sphinx plugin package, then assign access to the appropriate users, groups, or roles.
+- **Unable to install the Sphinx plugin/connector:** This action generally requires elevated permissions within your Claude/Cursor/Codex/etc account if you belong to a Team/Enterprise account. For instance, Claude only allows Owners (not Admins) to configure new plugins and connectors. Consult your sysadmin to add Sphinx.
+- **Unable to authenticate with Sphinx:** Confirm that you have a valid Sphinx account by logging in to <https://app.sphinx.ai>. Note that a pre-existing Sphinx account is required; contact the Sphinx team to get started.
+- **Server is not invoking Sphinx:** Some clients require an additional manual authentication/connection step after configuring the plugin/connector. Check your setup to ensure the Sphinx connector is authenticated and connected. 
+
+If you encounter other issues, please contact our support team at <support@sphinx.ai>.
