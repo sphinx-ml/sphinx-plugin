@@ -4,10 +4,6 @@ We recommend installing Sphinx as a plugin for your Claude account. This will al
 
 Note that individual installation is only possible for Claude users not belonging to a Team or Enterprise Claude account. Those users should instead refer to the team installation section.
 
-1. Download this repository as a [.zip archive](https://github.com/sphinx-ml/sphinx-plugin/archive/refs/heads/main.zip).
-2. From the Claude website, open the [**Customize** tab](https://claude.ai/customize), then select
-Install the plugin from Claude's plugin UI. In Claude, open the [**Customize** tab](https://claude.ai/customize), then select **Personal plugins** >> **+** >> **Create plugin** >> **Upload plugin**, providing the .zip archive from the previous step.
-
 1. From the Claude website, open the [**Customize** tab](https://claude.ai/customize), then select **Personal plugins** >> **+** >> **Create plugin** >> **Add marketplace**
 2. Click on the URL field, type "sphinx-ml/sphinx-plugin" into the text input, click 'Use "sphinx-ml/sphinx-plugin"', then click "Sync".
 3. In the plugins directory, select and install the Sphinx plugin.
