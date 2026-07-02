@@ -2,7 +2,7 @@
   "mcpServers": {
     "sphinx": {
       "type": "http",
-      "url": "https://api.prod.sphinx.ai/mcp"
+      "url": "http://localhost:8000/mcp"
     }
   }
 }
