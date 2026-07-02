@@ -1,5 +1,5 @@
 {
-  "name": "sphinx",
+  "name": "sphinx-artifact",
   "displayName": "Sphinx",
   "description": "Sphinx knowledge base plugin for Claude.",
   "version": "1.0.0",

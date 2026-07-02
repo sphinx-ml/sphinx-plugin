@@ -1,11 +1,11 @@
 {
-  "name": "sphinx",
+  "name": "sphinx-artifact",
   "interface": {
     "displayName": "Sphinx"
   },
   "plugins": [
     {
-      "name": "sphinx-plugin",
+      "name": "sphinx-artifact",
       "source": {
         "source": "local",
         "path": "."

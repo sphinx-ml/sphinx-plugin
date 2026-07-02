@@ -1,5 +1,5 @@
 {
-  "name": "sphinx",
+  "name": "sphinx-artifact",
   "owner": {
     "name": "Sphinx",
     "url": "https://sphinx.ai"
@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "sphinx",
+      "name": "sphinx-artifact",
       "source": {
         "source": "github",
         "repo": "sphinx-ml/sphinx-plugin"
