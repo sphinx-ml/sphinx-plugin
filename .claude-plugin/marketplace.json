@@ -13,7 +13,7 @@
       "name": "sphinx-artifact",
       "source": {
         "source": "github",
-        "repo": "sphinx-ml/sphinx-plugin"
+        "repo": "sphinx-ml/artifact-sphinx-plugin"
       },
       "description": "Sphinx knowledge base plugin for Claude.",
       "version": "1.0.0",

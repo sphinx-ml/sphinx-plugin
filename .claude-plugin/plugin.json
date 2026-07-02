@@ -8,7 +8,7 @@
     "url": "https://sphinx.ai"
   },
   "homepage": "https://sphinx.ai",
-  "repository": "https://github.com/sphinx-ml/sphinx-plugin",
+  "repository": "https://github.com/sphinx-ml/artifact-sphinx-plugin",
   "license": "Apache-2.0",
   "keywords": [
     "data",

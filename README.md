@@ -24,6 +24,7 @@ The Sphinx MCP server relies on OAuth authentication with Dynamic Client Registr
 
 ## MCP Tools
 
+- `get_prompt`: Retrieve Sphinx behavioral guidance for data analysis and data science tasks.
 - `search`: Search the Sphinx knowledge base with a natural-language query. Use vector search for conceptual questions and keyword search for exact terms.
 - `fetch`: Retrieve the full text of a knowledge base page. Must follow a call to `search`.
 - `suggest_edits`: Ask Sphinx to asynchronously improve the knowledge base based on natural-language guidance. The tool returns a URL where the created job can be monitored.
