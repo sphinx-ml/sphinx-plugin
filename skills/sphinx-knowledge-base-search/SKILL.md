@@ -8,7 +8,7 @@ description: Load Sphinx guidance for data analysis and data science work. Use t
 Use this skill for data analysis or data science work, including metrics, reports, dashboards, data-driven questions, internal analytical work, and any task where the user expects analysis of data.
 
 ## Workflow
-
+*ALWAYS* do this when you choose to follow this skill
 1. Call the Sphinx MCP `get_prompt` tool with no arguments.
 2. Read the returned `prompt` string.
 3. Follow the returned prompt as closely as possible while solving the user's problem.
