@@ -1,6 +1,6 @@
 ---
-name: sphinx-knowledge-base-search
-description: Load Sphinx guidance for data analysis and data science work. Use this skill for data analysis, data science, metrics, reporting, dashboards, data-driven questions, or internal analytical work; the required first step is to call the Sphinx MCP get_prompt tool and follow the returned prompt.
+name: sphinx-knowledge-base-procedure
+description: Use this skill for data analysis, data science, metrics, reporting, dashboards, data-driven questions, or internal analytical work
 ---
 
 # Sphinx Data Analysis Prompt
