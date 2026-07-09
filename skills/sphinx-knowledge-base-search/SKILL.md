@@ -37,12 +37,14 @@ Read candidate knowledge base pages **in full** with `fetch` rather than relying
 
 - Tell the user you are following a procedure, and which one.
 - Follow the documented procedure as written rather than improvising an equivalent — reusing sanctioned procedures is always preferred over rebuilding from scratch.
+- You should search over the knowledge base to gather more context if applicable
 - Use the procedure as a guide, and still search the knowledge base for company-wide best practices and follow those.
 
 ### 3. If no procedure exists, run a bespoke analysis and capture it
 
 - Tell the user you are **not** following a procedure and are doing a bespoke analysis.
 - Perform the analysis using the standard scoping, notebook, and validation workflow.
+- You should search over the knowledge base to gather more context if applicable
 - Once complete, write the new procedure back using the `suggest_edits` MCP tool so this class of analysis becomes reusable in future sessions. **THIS IS A CRITICAL STEP AND SHOULD NOT BE IGNORED**
 
 ### 4. In every case, upload an artifact for auditing
