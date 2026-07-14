@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "sphinx": {
+      "type": "https",
+      "url": "https://api.prod.sphinx.ai/mcp"
+    }
+  }
+}

@@ -8,7 +8,7 @@
       "name": "sphinx-artifact",
       "source": {
         "source": "local",
-        "path": "."
+        "path": "plugins/sphinx-artifact"
       },
       "policy": {
         "installation": "AVAILABLE",

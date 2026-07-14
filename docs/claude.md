@@ -7,8 +7,23 @@ Note that individual installation is only possible for Claude users not belongin
 1. From the Claude website, open the [**Customize** tab](https://claude.ai/customize), then select **Personal plugins** >> **+** >> **Create plugin** >> **Add marketplace**
 2. Click on the URL field, type "sphinx-ml/artifact-sphinx-plugin" into the text input, click 'Use "sphinx-ml/artifact-sphinx-plugin"', then click "Sync".
 3. In the plugins directory, select and install the Sphinx plugin.
-4. Select the Sphinx connector within the Sphinx plugin, and click "Connnect" to authenticate with Sphinx.
+4. Select the Sphinx connector within the Sphinx plugin, and click "Connect" to authenticate with Sphinx.
 5. Sphinx is now ready to use!
+
+## Claude Code Installation
+
+This repository is a Claude plugin marketplace. Add the marketplace from the repository root, then install the plugin from the marketplace:
+
+```text
+/plugin marketplace add sphinx-ml/artifact-sphinx-plugin
+/plugin install sphinx-artifact@sphinx-artifact
+```
+
+For local development, load the installable plugin directory directly:
+
+```bash
+claude --plugin-dir ./plugins/sphinx-artifact
+```
 
 See also:
 

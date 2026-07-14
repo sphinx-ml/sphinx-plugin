@@ -13,6 +13,7 @@ This page is the default SOP for performing any analysis. It covers how to:
 
 - Work in the approved analytical environment.
 - Use approved tables and default filters.
+- How to load in other procedures to use
 - Clarify ambiguous requests before writing SQL.
 - Verify results against benchmarks when available.
 - Execute notebooks cleanly.
@@ -22,22 +23,19 @@ This page is the default SOP for performing any analysis. It covers how to:
 
 ## Primary Problem-Solving Workflow
 
-Every analysis request follows the same top-level decision procedure. This governs **how** the agent decides to proceed and takes precedence over the more detailed scoping and notebook mechanics below (which describe how to execute once a path is chosen). Follow these steps as closely as possible.
+Every analysis request follows the same top-level decision procedure. This governs **how** the agent decides to proceed and takes precedence over the more detailed scoping and notebook mechanics below (which describe how to execute once a path is chosen). Follow these steps as closely as possible. When possible, do all your analysis in a jupyter notebook according to company standards.
 
 ### 1. Search for an existing procedure first
 
-Check **both** locations before starting any bespoke work:
+Check check here before starting any bespoke work
 
-- **This master prompt** — already in your context; scan it for a relevant procedure.
-- **The Sphinx knowledge base** — reached via the MCP `search` and `fetch` tools; search for documented procedures, cookbook patterns, or prior analyses that answer the question.
+- **The Sphinx knowledge base** — reached via the MCP `search` and `fetch` tools; search for documented procedures, cookbook patterns, or prior analyses that can be used to answer the question.
 
-Read candidate knowledge base pages **in full** with `fetch` rather than relying on search snippets.
+Read promising knowledge base pages **in full** with `fetch` rather than relying on search snippets.
 
-### 2. If a matching procedure exists, follow it
-
-- Tell the user you are following a procedure, and which one.
-- Follow the documented procedure as written rather than improvising an equivalent — reusing sanctioned procedures is always preferred over rebuilding from scratch.
-- You should search over the knowledge base to gather more context if applicable
+### 2. If procedures are found that can be used to solve the user request, use them
+- Tell the user you are following some combination of procedures and which ones.
+- You should search over the knowledge base to gather more context - metrics definitions, data structure, tables contents, etc...
 - Use the procedure as a guide, and still search the knowledge base for company-wide best practices and follow those.
 
 ### 3. If no procedure exists, run a bespoke analysis and capture it
@@ -45,11 +43,11 @@ Read candidate knowledge base pages **in full** with `fetch` rather than relying
 - Tell the user you are **not** following a procedure and are doing a bespoke analysis.
 - Perform the analysis using the standard scoping, notebook, and validation workflow.
 - You should search over the knowledge base to gather more context if applicable
-- Once complete, write the new procedure back using the `suggest_edits` MCP tool so this class of analysis becomes reusable in future sessions. **THIS IS A CRITICAL STEP AND SHOULD NOT BE IGNORED**
+- Once complete, write the new procedure back using the `suggest_edits` MCP tool so this class of analysis becomes reusable in future sessions. Make sure to check if this new analysis can be baked into an existing procedure. **THIS IS A CRITICAL STEP AND SHOULD NOT BE IGNORED**
 
 ### 4. In every case, upload an artifact for auditing
 
-Regardless of which path you take, upload an artifact to the artifact store so the work is auditable later:
+Regardless of which path you take, upload an artifact to the artifact store so the work is auditable later. Important to note to only upload an artifact when an analysis is completed, do not upload a half baked analysis.:
 
 1. Mint a short-lived access token with `mint_artifact_store_jwt`.
 2. Upload to the artifact server (see [Uploading an Artifact File](#uploading-an-artifact-file)).
@@ -84,6 +82,55 @@ The standard analysis deliverable is a Jupyter notebook with a fixed structure. 
 ### Number discipline
 
 Every stakeholder-facing number must be produced by notebook cell output — never mental math or undocumented hand-calculation. Print intermediate row counts, sanity checks, and aggregation outputs visibly in the notebook.
+
+### helpers/plot_helpers.py — single canonical source
+
+Chart primitives live in **one file**: `helpers/plot_helpers.py`. Do not copy it. Do not create a local `plot_helpers.py` in the output directory.
+
+Every notebook imports from the canonical source using this sys.path pattern:
+
+```python
+import sys
+from pathlib import Path
+_mabel_root = Path.cwd()
+while not (_mabel_root / 'helpers' / 'plot_helpers.py').exists() and _mabel_root != _mabel_root.parent:
+    _mabel_root = _mabel_root.parent
+if str(_mabel_root) not in sys.path:
+    sys.path.insert(0, str(_mabel_root))
+from helpers.plot_helpers import div0
+```
+
+The canonical file (`helpers/plot_helpers.py`) exports: `COLORS`, `CHART_FIGSIZE`, `div0`, `swd_style`, `action_title`, `save_chart`, `format_date_axis`, `add_event_span`, `highlight_bar`, `highlight_line`, `annotate_bars`, `stacked_bar`, `grouped_bar`, `forecast_plot`, `retention_heatmap`, `funnel_waterfall`, `slope_chart`.
+
+### Database Connection
+
+```
+## Database Connection
+
+Snowflake access goes through the canonical helper at `helpers/snowflake_helpers.py`.
+The helper enforces `warehouse=MABEL_WH` and the RSA key-pair auth pattern — do not
+paste connection boilerplate inline (per `.claude/rules/analysis.md`).
+
+Two entrypoints:
+  - `get_connection()`            — returns (ctx, cs); use when you need cursor control
+                                    (multi-statement, executemany, parameter binding).
+  - `query_to_dataframe(sql)`     — runs SQL, returns a cleaned `pd.DataFrame`
+                                    (decimal→numeric, tz-strip on datetimetz columns).
+                                    Right choice for 99% of read-only notebook queries.
+```
+
+```python
+from helpers.snowflake_helpers import get_connection, query_to_dataframe
+```
+
+## Data Loading
+
+```
+
+The query applies all standard filters from the connection template before any metric
+computation runs. Any deviation from the standard filter set must be documented
+as a comment in the cell below, with the business reason.
+```
 
 ---
 

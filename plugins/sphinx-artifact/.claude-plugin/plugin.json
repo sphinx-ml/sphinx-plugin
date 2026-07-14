@@ -2,13 +2,12 @@
   "name": "sphinx-artifact",
   "displayName": "Sphinx",
   "description": "Sphinx knowledge base plugin for Claude.",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "author": {
-    "name": "Sphinx",
-    "url": "https://sphinx.ai"
+    "name": "Sphinx"
   },
   "homepage": "https://sphinx.ai",
-  "repository": "https://github.com/sphinx-ml/artifact-sphinx-plugin/#v1",
+  "repository": "https://github.com/sphinx-ml/artifact-sphinx-plugin",
   "license": "Apache-2.0",
   "keywords": [
     "data",

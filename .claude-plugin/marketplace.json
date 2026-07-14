@@ -1,23 +1,31 @@
 {
   "name": "sphinx-artifact",
   "owner": {
-    "name": "Sphinx",
-    "url": "https://sphinx.ai"
+    "name": "Sphinx"
   },
-  "metadata": {
-    "description": "Sphinx knowledge base for internal context.",
-    "version": "2.0.0"
-  },
+  "description": "Sphinx knowledge base for internal context.",
+  "version": "1.0.0",
   "plugins": [
     {
       "name": "sphinx-artifact",
-      "source": {
-        "source": "github",
-        "repo": "sphinx-ml/artifact-sphinx-plugin",
-        "ref": "v1"        
-      },
+      "source": "./plugins/sphinx-artifact",
+      "displayName": "Sphinx",
       "description": "Sphinx knowledge base plugin for Claude.",
-      "version": "2.0.0",
+      "version": "1.0.0",
+      "author": {
+        "name": "Sphinx"
+      },
+      "homepage": "https://sphinx.ai",
+      "repository": "https://github.com/sphinx-ml/artifact-sphinx-plugin",
+      "license": "Apache-2.0",
+      "keywords": [
+        "data",
+        "search",
+        "wiki",
+        "knowledge",
+        "internal-context"
+      ],
+      "category": "productivity",
       "strict": true
     }
   ]

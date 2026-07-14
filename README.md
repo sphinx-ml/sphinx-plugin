@@ -6,9 +6,20 @@ Sphinx can be installed either as a plugin in supported clients (recommended) or
 
 Client-specific installation instructions are provided below. Note that only users with pre-existing Sphinx accounts can use this plugin. If you are interested in trying Sphinx, contact our sales team.
 
-- [Claude](.claude-plugin/README.md)
+- [Claude](docs/claude.md)
 - [Codex](.codex-plugin/README.md)
 - [Cursor](.cursor-plugin/README.md)
+
+## Repository Layout
+
+This repository is structured as a Claude plugin marketplace. The marketplace catalog lives at `.claude-plugin/marketplace.json`, and the installable Claude plugin lives at `plugins/sphinx-artifact/`.
+
+The plugin root contains:
+
+- `.claude-plugin/plugin.json` — Claude plugin manifest.
+- `.mcp.json` — Sphinx MCP server configuration.
+- `skills/sphinx-knowledge-base-search/SKILL.md` — Sphinx analysis workflow skill.
+- `assets/` — plugin imagery.
 
 ## MCP Connector Setup
 
