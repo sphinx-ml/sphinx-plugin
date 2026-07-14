@@ -18,7 +18,7 @@ The plugin root contains:
 
 - `.claude-plugin/plugin.json` — Claude plugin manifest.
 - `.mcp.json` — Sphinx MCP server configuration.
-- `skills/sphinx-knowledge-base-search/SKILL.md` — Sphinx analysis workflow skill.
+- `skills/analyze-data-with-sphinx/SKILL.md` — Sphinx analysis workflow skill.
 - `assets/` — plugin imagery.
 
 ## MCP Connector Setup

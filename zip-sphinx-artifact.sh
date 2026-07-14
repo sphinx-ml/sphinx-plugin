@@ -2,8 +2,9 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-OUTPUT_FILE="sphinx-artifact-marketplace.zip"
+OUTPUT_FILE="$SCRIPT_DIR/sphinx-artifact.zip"
+PLUGIN_DIR="$SCRIPT_DIR/plugins/sphinx-artifact"
 
-cd "$SCRIPT_DIR"
 rm -f "$OUTPUT_FILE"
-zip -r "$OUTPUT_FILE" . -x "$OUTPUT_FILE" "./$OUTPUT_FILE" "./.git/*"
+cd "$PLUGIN_DIR"
+zip -r "$OUTPUT_FILE" .

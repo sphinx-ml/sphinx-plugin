@@ -1,6 +1,6 @@
 ---
-name: sphinx-knowledge-base-procedure
-description: Use this skill for data analysis, data science, metrics, reporting, dashboards, data-driven questions, or internal analytical work.
+name: analyze-data-with-sphinx
+description: Use this Sphinx workflow whenever answering a question requires finding, querying, filtering, joining, comparing, grouping, summarizing, or calculating from data, records, tables, datasets, study results, or knowledge-base content. Trigger even when the user asks only a domain question and never says "data" or "analysis", including requests for attributes of matching records; averages, medians, counts, rates, correlations, distributions, rankings, or extrema; comparisons between groups; or relationships among entities, identifiers, categories, conditions, and external reference data. Applies to every subject area, including business, scientific, operational, and marketing data.
 ---
 
 # Sphinx Data Analysis Procedure
@@ -62,114 +62,6 @@ Guidelines:
 
 ---
 
-## Notebook Structure
-
-The standard analysis deliverable is a Jupyter notebook with a fixed structure. Each logical function or metric block should be introduced by a markdown cell explaining **why** it exists, not just what the code does.
-
-### Required components
-
-- **Title and purpose cell** with the exact user prompt or confirmed augmented prompt.
-- **AI-generated analysis disclaimer** in every notebook.
-- **First-time analysis disclaimer** when no similar prior analysis exists; otherwise use an optional provenance note instead.
-- **Imports and configuration** that resolve the output directory and repository root robustly.
-- **Database connection section** using canonical helpers.
-- **Data loading section** with SQL inline, visible row counts, dtypes, and sample rows.
-- **Reference verification section** when matching benchmarks exist.
-- **One markdown-plus-code section per metric group.**
-- **Visualization setup section** using the canonical plotting helpers.
-- **Final markdown cell** summarizing key findings, distinguishing new vs. confirmed knowledge, and noting artifact tracking.
-
-### Number discipline
-
-Every stakeholder-facing number must be produced by notebook cell output — never mental math or undocumented hand-calculation. Print intermediate row counts, sanity checks, and aggregation outputs visibly in the notebook.
-
-### helpers/plot_helpers.py — single canonical source
-
-Chart primitives live in **one file**: `helpers/plot_helpers.py`. Do not copy it. Do not create a local `plot_helpers.py` in the output directory.
-
-Every notebook imports from the canonical source using this sys.path pattern:
-
-```python
-import sys
-from pathlib import Path
-_mabel_root = Path.cwd()
-while not (_mabel_root / 'helpers' / 'plot_helpers.py').exists() and _mabel_root != _mabel_root.parent:
-    _mabel_root = _mabel_root.parent
-if str(_mabel_root) not in sys.path:
-    sys.path.insert(0, str(_mabel_root))
-from helpers.plot_helpers import div0
-```
-
-The canonical file (`helpers/plot_helpers.py`) exports: `COLORS`, `CHART_FIGSIZE`, `div0`, `swd_style`, `action_title`, `save_chart`, `format_date_axis`, `add_event_span`, `highlight_bar`, `highlight_line`, `annotate_bars`, `stacked_bar`, `grouped_bar`, `forecast_plot`, `retention_heatmap`, `funnel_waterfall`, `slope_chart`.
-
-### Database Connection
-
-```
-## Database Connection
-
-Snowflake access goes through the canonical helper at `helpers/snowflake_helpers.py`.
-The helper enforces `warehouse=MABEL_WH` and the RSA key-pair auth pattern — do not
-paste connection boilerplate inline (per `.claude/rules/analysis.md`).
-
-Two entrypoints:
-  - `get_connection()`            — returns (ctx, cs); use when you need cursor control
-                                    (multi-statement, executemany, parameter binding).
-  - `query_to_dataframe(sql)`     — runs SQL, returns a cleaned `pd.DataFrame`
-                                    (decimal→numeric, tz-strip on datetimetz columns).
-                                    Right choice for 99% of read-only notebook queries.
-```
-
-```python
-from helpers.snowflake_helpers import get_connection, query_to_dataframe
-```
-
-## Data Loading
-
-```
-
-The query applies all standard filters from the connection template before any metric
-computation runs. Any deviation from the standard filter set must be documented
-as a comment in the cell below, with the business reason.
-```
-
----
-
-## Visualization and Notebook Code Standards
-
-Visualization helpers should come from the single canonical plotting helper module rather than being copied into each project. Notebook code may include analysis-specific helper logic, but shared chart primitives should stay centralized. Reload the plotting helper module before import so changes are picked up consistently.
-
-### Standard chart rules
-
-- Focus series uses the standard blue color.
-- Comparison / non-focus series use gray.
-- Legend position is upper right, with no frame.
-- Bar labels use the canonical bar-annotation helper rather than manual, repetitive `ax.text()` loops.
-- Horizontal-bar axis padding is left to the annotation helper unless a later adjustment is necessary.
-- Stacked bars show centered segment labels.
-
-### Other standards
-
-- Always save charts to disk and render them inline via the canonical `save_chart` helper — do not rely on `plt.show()` alone.
-- When adding event spans to plots, call `set_ylim` first so labels anchor correctly.
-- For any scalar division where the denominator might be zero, use the canonical `div0()` helper instead of bare division, so ratios and percent-change calculations are robust to zero-denominator cases.
-
----
-
-## Notebook Execution and Auto-Fix Loop
-
-After a notebook is written or extended:
-
-1. Execute it.
-2. Inspect the resulting notebook JSON for cell errors.
-3. Fix any errors and retry, up to a bounded number of rounds, before presenting the notebook as complete.
-
-The goal is to deliver a clean, executable notebook rather than an untested draft.
-
-- User-facing communication should mention only the final clean state, or — if retries fail — a concise summary of unresolved errors and attempted fixes. Do not show intermediate failed runs.
-- If automated execution is not possible in the environment, skip execution silently and add a comment instructing manual execution in the approved notebook environment.
-
----
-
 ## Persistent Knowledge Layer
 
 The persistent knowledge layer retains reusable dataset schemas, business context, learnings, reusable SQL patterns, and prior analysis history — so agents and analysts can start each session with the right context instead of rebuilding it from scratch. This is what you should interact with to update and change the knowledge base.
@@ -199,7 +91,7 @@ The minted JWT is short-lived and scoped to the current MCP project and user, so
 ### Option A — Upload with an inline payload
 
 ```bash
-curl -X POST "http://localhost:8000/artifact_store.ArtifactStoreService/UploadArtifact" \
+curl -X POST "https://api.prod.sphinx.ai/artifact_store.ArtifactStoreService/UploadArtifact" \
   -H "Content-Type: application/json" \
   -H "X-Sphinx-Artifact-Store-JWT: $ARTIFACT_STORE_JWT" \
   -H "X-Sphinx-Version: 1.0.0" \
@@ -217,7 +109,7 @@ Base64-encode first, then POST:
 FILE="example.txt"
 PAYLOAD=$(base64 -w 0 "$FILE")
 
-curl -X POST "http://localhost:8000/artifact_store.ArtifactStoreService/UploadArtifact" \
+curl -X POST "https://api.prod.sphinx.ai/artifact_store.ArtifactStoreService/UploadArtifact" \
   -H "Content-Type: application/json" \
   -H "X-Sphinx-Artifact-Store-JWT: $ARTIFACT_STORE_JWT" \
   -H "X-Sphinx-Version: 1.0.0" \
