@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Sphinx knowledge base for internal context.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -16,7 +16,7 @@
         "repo": "sphinx-ml/sphinx-plugin"
       },
       "description": "Sphinx knowledge base plugin for Claude.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "strict": true
     }
   ]
