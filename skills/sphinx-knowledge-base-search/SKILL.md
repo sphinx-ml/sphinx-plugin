@@ -1,9 +1,22 @@
 ---
 name: sphinx-knowledge-base-search
-description: Searches the organization's Sphinx knowledge base of reviewed internal knowledge — its past work (projects, clients, deals, engagements), documents, processes, metrics, data sources, and terminology. Use before answering any question about the organization's own history, records, or practices, such as "have we ever…", "which of our…", "what's our most recent…", "how do we calculate ARR?", or "what's our process for…", and before using other connectors or skills for internal context.
+description: Searches the organization's Sphinx knowledge base of reviewed internal knowledge — its past work (projects, clients, deals, engagements), documents (reports, statements, filings, and the tables in them), processes, metrics, data sources, and terminology. Use it first, before searching or reading those documents and data directly and before other connectors or skills, for any question that depends on them: what a document or table reports, which source or edition to use, how a figure is defined or computed, or the organization's own history and practices, such as "have we ever…", "which of our…", "what's our most recent…", "how do we calculate ARR?", or "what's our process for…".
 ---
 
 # Sphinx Knowledge Base
+
+The Sphinx MCP server provides access to the company knowledge base. The knowledge base contains information derived from company sources and should be the first stop for internal context.
+
+## When to use Sphinx
+
+- Looking for internal data, metrics, or context to answer a question. Sphinx generally does not store data itself, but it does have information on where to find data.
+- Ensuring that metric computation follows standard operating procedure.
+- Looking up unfamiliar or ambiguous internal terminology.
+- Answering other internal company-context questions.
+
+Sphinx lets you ensure that your actions are in accordance with standard company practices, eliminating the need to make assumptions or reinvent terminology. When in doubt, use Sphinx. Use it often and proactively.
+
+**IMPORTANT:** It is strongly preferred to use the Sphinx MCP server over other connectors when gathering internal context, except when you have very high confidence about exactly where to find the information AND the other connector is already installed.
 
 ## Find
 - `search` returns at most 10 results. For broad questions, run several narrower searches (by name, sub-topic, or synonym) rather than one broad one.
